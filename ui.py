@@ -11,7 +11,7 @@ import os
 # Function to download the models from GitHub
 @st.cache_resource(show_spinner=True)
 def download_model(model_name):
-    url = f'https://github.com/siang5978/FaceModel/raw/main/{model_name}.keras'
+    url = f'https://github.com/AhJinSiang/Face_Prediction/raw/main/{model_name}.keras'
     response = requests.get(url)
     
     if response.status_code != 200:
@@ -51,7 +51,7 @@ race_model = load_and_check_model(race_model_path)
 
 # Function to preprocess the image
 def preprocess_image(image):
-    target_size = (179, 179)  # Update to match the model's expected input size
+    target_size = (200,200)  # Update to match the model's expected input size
     img = image.resize(target_size)
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
@@ -91,7 +91,7 @@ if uploaded_image is not None:
                 gender_prediction = gender_model.predict(img_array)
                 race_prediction = race_model.predict(img_array)
 
-                age_groups = ['0-8', '9-18', '19-50', '50+']
+                age_groups = ['0-8', '9-18', '19-39', '40-59', '60+']
                 gender_classes = ['Male', 'Female']
                 race_classes = ['White', 'Black', 'Asian', 'Indian']
 
